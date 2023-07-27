@@ -13,7 +13,6 @@ public class Move : MonoBehaviour
 	public Camera Playercamera;
 	private Rigidbody _rb;
 	private int _count;
-	private Vector2 _inputValues;
 	private bool _isReadyToMove, _isReadyToPlay = true;
 	private Vector3 _initialPostion, _checkpointPosition;
 	public AudioClip WinSound;
@@ -28,6 +27,8 @@ public class Move : MonoBehaviour
 	public GameObject CurrentPanel;
 	public CameraFollow cameraFollow;
 	public AudioClip metallSound;
+	public float smoothness;
+	public VariableJoystick Joystick;
 	private void Awake()
 	{
 		GetReferences();
@@ -52,20 +53,35 @@ public class Move : MonoBehaviour
     }
     private Vector2 GetInputData()
 	{
-		return new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+		return new Vector2(Joystick.Horizontal, Joystick.Vertical);
 	}
 	private void Moving()
 	{
-		Vector3 movement = new Vector3(_inputValues.x, 0, _inputValues.y);
-		movement = Playercamera.transform.TransformDirection(movement);
-		movement.y = 0;
-		movement.Normalize();
-		_rb.AddForce(movement * speed * Time.fixedDeltaTime, ForceMode.VelocityChange);
+		Vector3 movementDirection = new Vector3(GetInputData().x, 0, GetInputData().y);
+
+		movementDirection = Playercamera.transform.TransformDirection(movementDirection);
+		movementDirection.y = 0;
+		movementDirection.Normalize();
+
+		Vector3 currentVelocity = _rb.velocity;
+		currentVelocity.y = 0f;
+
+		_rb.AddForce(movementDirection * speed - currentVelocity , ForceMode.Force);
 	}
 	void FixedUpdate()
 	{
-		if (!_isReadyToPlay) return;
-		if(_isReadyToMove) Moving();
+		if (!_isReadyToPlay)
+		{
+			return;
+		}
+
+		if (_isReadyToMove)
+		{
+			if (GetInputData() != Vector2.zero)
+			{
+				Moving();
+			}
+		}
 	}
 	
 	private void CameraMoveToTarget(Vector3 position, float duration)
@@ -76,7 +92,6 @@ public class Move : MonoBehaviour
     private void Update()
     {
 		if (!_isReadyToPlay) return;
-		_inputValues = GetInputData();
 		_isReadyToMove = Input.anyKey;
 		currentSpeed = _rb.velocity.magnitude;
     }
