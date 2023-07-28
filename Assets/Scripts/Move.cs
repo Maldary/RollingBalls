@@ -1,4 +1,5 @@
 using System.Collections;
+using Cinemachine;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine.UI;
 using UnityEngine;
@@ -21,11 +22,10 @@ public class Move : MonoBehaviour
 	public float currentSpeed;
 	public float frictionCoefficient = 1.5f;
 	public Vector3 finishLinePosition;
-	private CameraFollow _cameraFollow;
+	public CinemachineVirtualCamera cvc;
 	public float moveToFinishLineDuration = 1.0f;
 	public GameObject panel;
 	public GameObject CurrentPanel;
-	public CameraFollow cameraFollow;
 	public AudioClip metallSound;
 	public float smoothness;
 	public VariableJoystick Joystick;
@@ -119,9 +119,6 @@ public class Move : MonoBehaviour
 	    if (collision.gameObject.CompareTag("MovablePlace")) {
 		    _audioSource.pitch = GetPitch(currentSpeed);
 	    }
-	    if (collision.gameObject.CompareTag("MetallStick")) {
-		    _audioSource.pitch = GetPitch(currentSpeed);
-	    }
     }
     
     
@@ -189,7 +186,7 @@ public class Move : MonoBehaviour
 							collider.sharedMaterial = physicsMat;
 						});
 				});
-			cameraFollow.enabled = false;
+			cvc.enabled = false;
 			StartCoroutine(SecCoroutine());
 			CameraMoveToTarget(finishLinePosition, moveToFinishLineDuration);
 			CurrentPanel.SetActive(false);
