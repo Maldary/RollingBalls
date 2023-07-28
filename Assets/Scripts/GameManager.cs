@@ -5,16 +5,20 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public int coins;
-    public TextMeshPro coinText;
+    private TextMeshProUGUI coinText;
 
     void Start()
     {
-        coinText = GetComponent<TextMeshPro>();
+        coinText = GetComponent<TextMeshProUGUI>();
+        coins = PlayerPrefs.GetInt("COINS", 0);
+        coinText.text = coins.ToString();
     }
 
     public void AddCoins(int amount)
     {
         coins += amount;
+        coinText.text = coins.ToString();
+        PlayerPrefs.SetInt("COINS", coins);
     }
 
     public int GetCoins()

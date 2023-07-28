@@ -3644,7 +3644,7 @@ MonoBehaviour:
   _audioSource: {fileID: 1945058944}
   currentSpeed: 0
   frictionCoefficient: 1
-  finishLinePosition: {x: 94, y: -22, z: 328}
+  finishLinePosition: {x: 223, y: -10, z: 297}
   cvc: {fileID: 321178839}
   moveToFinishLineDuration: 1
   panel: {fileID: 799611489}
@@ -3720,7 +3720,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36815f5398a3a6c4ab211ba7b88aaed1, type: 2}
+  - {fileID: 2100000, guid: 3c33fd4c9fec57b49a69712e7bc04fac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

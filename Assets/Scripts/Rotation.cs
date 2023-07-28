@@ -7,9 +7,7 @@ public class Rotation : MonoBehaviour
     public int coinValue = 1;
     public AudioClip collectSound;
     public float rotationSpeed = 160f;
-    public TextMeshProUGUI coinText;
     private Animator animator;
-    private int coinsCollected;
     private GameManager gameManager;
 
     void Start()
@@ -31,8 +29,7 @@ public class Rotation : MonoBehaviour
             animator.Play("CoinCollect");
             AudioSource.PlayClipAtPoint(collectSound, transform.position);
             Destroy(gameObject);
-            coinsCollected += gameManager.GetCoins();
-            coinText.SetText ("" + gameManager.coins);
+            
         }
     }
 }

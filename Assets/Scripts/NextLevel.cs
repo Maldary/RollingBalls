@@ -9,7 +9,12 @@ public class NextLevel : MonoBehaviour
     public void Load()
     {
         int index = SceneManager.GetActiveScene().buildIndex + 1;
+        if (index > 10)
+        {
+           index = 1;
+        }
         SceneManager.LoadScene(index);
+        PlayerPrefs.SetInt("LVL", index);
         panel.SetActive(false);
     }
 }

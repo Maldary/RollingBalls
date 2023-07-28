@@ -791,7 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0464f231ddee6448bc357b64ad3c38f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1397438824}
   panel: {fileID: 126521381}
 --- !u!4 &370609822
 Transform:
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 126521381}
-  audioSource: {fileID: 0}
+  audioSource: {fileID: 1397438824}
 --- !u!1 &431790485
 GameObject:
   m_ObjectHideFlags: 0
@@ -1726,10 +1726,10 @@ MonoBehaviour:
   _audioSource: {fileID: 1397438826}
   currentSpeed: 0
   frictionCoefficient: 1
-  finishLinePosition: {x: 94, y: -22, z: 328}
-  cvc: {fileID: 0}
+  finishLinePosition: {x: 92, y: 10, z: 60}
+  cvc: {fileID: 1151357861}
   moveToFinishLineDuration: 1
-  panel: {fileID: 126521381}
+  panel: {fileID: 1231522253}
   CurrentPanel: {fileID: 270299167}
   metallSound: {fileID: 8300000, guid: 2cefd8fda0afe0a4d80dde825d94efde, type: 3}
   smoothness: 1
@@ -1802,7 +1802,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36815f5398a3a6c4ab211ba7b88aaed1, type: 2}
+  - {fileID: 2100000, guid: 3c33fd4c9fec57b49a69712e7bc04fac, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3602,10 +3602,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 2125866983}
   - {fileID: 1231522254}
   - {fileID: 270299168}
   - {fileID: 126521384}
-  - {fileID: 2125866983}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
