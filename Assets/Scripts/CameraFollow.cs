@@ -9,7 +9,7 @@ public class CameraFollow : MonoBehaviour
     public float distance = 0.0f;
     public float height = 2.0f;
     
-    private void LateUpdate()
+    private void FixedUpdate()
     {
         Vector3 targetVelocity = target.GetComponent<Rigidbody>().velocity;
         Vector3 targetPosition = target.position + targetVelocity * Time.deltaTime;

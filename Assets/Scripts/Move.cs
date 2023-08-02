@@ -14,6 +14,7 @@ public class Move : MonoBehaviour
 	public Camera Playercamera;
 	private Rigidbody _rb;
 	private int _count;
+	private Vector2 _inputValues;
 	private bool _isReadyToMove, _isReadyToPlay = true;
 	private Vector3 _initialPostion, _checkpointPosition;
 	public AudioClip WinSound;
@@ -22,13 +23,12 @@ public class Move : MonoBehaviour
 	public float currentSpeed;
 	public float frictionCoefficient = 1.5f;
 	public Vector3 finishLinePosition;
-	public CinemachineVirtualCamera cvc;
+	private CameraFollow _cameraFollow;
 	public float moveToFinishLineDuration = 1.0f;
 	public GameObject panel;
 	public GameObject CurrentPanel;
+	public CameraFollow cameraFollow;
 	public AudioClip metallSound;
-	public float smoothness;
-	public VariableJoystick Joystick;
 	private void Awake()
 	{
 		GetReferences();
@@ -53,35 +53,37 @@ public class Move : MonoBehaviour
     }
     private Vector2 GetInputData()
 	{
-		return new Vector2(Joystick.Horizontal, Joystick.Vertical);
+		if (Input.touchCount > 0)
+		{
+			Touch touch = Input.GetTouch(0); // Get the first touch
+
+			// Check if the finger is moving
+			if (touch.phase == TouchPhase.Moved)
+			{
+				// Calculate the touch delta position
+				Vector2 deltaPosition = touch.deltaPosition;
+
+				// Normalize the delta position to get relative coordinates
+				deltaPosition.Normalize();
+
+				// Return the relative coordinates as input data
+				return deltaPosition;
+			}
+		}
+		return Vector2.zero;
 	}
 	private void Moving()
 	{
-		Vector3 movementDirection = new Vector3(GetInputData().x, 0, GetInputData().y);
-
-		movementDirection = Playercamera.transform.TransformDirection(movementDirection);
-		movementDirection.y = 0;
-		movementDirection.Normalize();
-
-		Vector3 currentVelocity = _rb.velocity;
-		currentVelocity.y = 0f;
-
-		_rb.AddForce(movementDirection * speed - currentVelocity , ForceMode.Force);
+		Vector3 movement = new Vector3(_inputValues.x, 0, _inputValues.y);
+		movement = Playercamera.transform.TransformDirection(movement);
+		movement.y = 0;
+		movement.Normalize();
+		_rb.AddForce(movement * speed * Time.fixedDeltaTime, ForceMode.Force);
 	}
 	void FixedUpdate()
 	{
-		if (!_isReadyToPlay)
-		{
-			return;
-		}
-
-		if (_isReadyToMove)
-		{
-			if (GetInputData() != Vector2.zero)
-			{
-				Moving();
-			}
-		}
+		if (!_isReadyToPlay) return;
+		if(_isReadyToMove) Moving();
 	}
 	
 	private void CameraMoveToTarget(Vector3 position, float duration)
@@ -92,6 +94,7 @@ public class Move : MonoBehaviour
     private void Update()
     {
 		if (!_isReadyToPlay) return;
+		_inputValues = GetInputData();
 		_isReadyToMove = Input.anyKey;
 		currentSpeed = _rb.velocity.magnitude;
     }
@@ -117,6 +120,9 @@ public class Move : MonoBehaviour
 
     private void OnCollisionStay(Collision collision) {
 	    if (collision.gameObject.CompareTag("MovablePlace")) {
+		    _audioSource.pitch = GetPitch(currentSpeed);
+	    }
+	    if (collision.gameObject.CompareTag("MetallStick")) {
 		    _audioSource.pitch = GetPitch(currentSpeed);
 	    }
     }
@@ -186,7 +192,7 @@ public class Move : MonoBehaviour
 							collider.sharedMaterial = physicsMat;
 						});
 				});
-			cvc.enabled = false;
+			cameraFollow.enabled = false;
 			StartCoroutine(SecCoroutine());
 			CameraMoveToTarget(finishLinePosition, moveToFinishLineDuration);
 			CurrentPanel.SetActive(false);
@@ -199,5 +205,4 @@ public class Move : MonoBehaviour
 
 
 }
-
 

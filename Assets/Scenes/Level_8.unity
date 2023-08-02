@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1582110008}
-  m_IndirectSpecularColor: {r: 0.17433435, g: 0.046658456, b: 0.029848358, a: 1}
+  m_IndirectSpecularColor: {r: 0.17440525, g: 0.0468788, b: 0.02983048, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -402,7 +402,6 @@ MonoBehaviour:
   coinValue: 1
   collectSound: {fileID: 8300000, guid: 701880948f1ece2458ce59fe760e821c, type: 3}
   rotationSpeed: 180
-  coinText: {fileID: 1373123186}
 --- !u!65 &119014652
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -682,7 +681,6 @@ MonoBehaviour:
   coinValue: 1
   collectSound: {fileID: 8300000, guid: 701880948f1ece2458ce59fe760e821c, type: 3}
   rotationSpeed: 180
-  coinText: {fileID: 1373123186}
 --- !u!65 &164556051
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -853,7 +851,7 @@ Transform:
   m_GameObject: {fileID: 184609799}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 95, y: -74, z: 177.5}
+  m_LocalPosition: {x: 95, y: -74, z: 77}
   m_LocalScale: {x: 200, y: 1, z: 500}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1389,7 +1387,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 306481924}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2350983, y: 0.000000018698126, z: -0.000000004522661, w: 0.97197163}
+  m_LocalRotation: {x: 0.2350983, y: -0.000000018698126, z: 0.000000004522661, w: 0.97197163}
   m_LocalPosition: {x: 94.13, y: 8.58, z: 1.1099997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2150,7 +2148,7 @@ Transform:
   m_GameObject: {fileID: 594478244}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 93.994, y: 1.32, z: 6.38}
+  m_LocalPosition: {x: 93.994, y: 1.32, z: 14.82}
   m_LocalScale: {x: 5.16, y: 1, z: 4.26}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3040,7 +3038,6 @@ MonoBehaviour:
   coinValue: 1
   collectSound: {fileID: 8300000, guid: 701880948f1ece2458ce59fe760e821c, type: 3}
   rotationSpeed: 180
-  coinText: {fileID: 1373123186}
 --- !u!65 &913042302
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3675,7 +3672,6 @@ MonoBehaviour:
   coinValue: 1
   collectSound: {fileID: 8300000, guid: 701880948f1ece2458ce59fe760e821c, type: 3}
   rotationSpeed: 180
-  coinText: {fileID: 1373123186}
 --- !u!65 &1320554473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3868,7 +3864,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coins: 0
-  coinText: {fileID: 0}
 --- !u!222 &1373123188
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -3968,7 +3963,6 @@ MonoBehaviour:
   coinValue: 1
   collectSound: {fileID: 8300000, guid: 701880948f1ece2458ce59fe760e821c, type: 3}
   rotationSpeed: 180
-  coinText: {fileID: 1373123186}
 --- !u!65 &1414705473
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4925,7 +4919,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1682703475}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2350983, y: 0.000000018698126, z: -0.000000004522661, w: 0.97197163}
+  m_LocalRotation: {x: 0.2350983, y: -0.000000018698126, z: 0.000000004522661, w: 0.97197163}
   m_LocalPosition: {x: 94.13, y: 8.58, z: 1.1099997}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -5680,7 +5674,6 @@ MonoBehaviour:
   coinValue: 1
   collectSound: {fileID: 8300000, guid: 701880948f1ece2458ce59fe760e821c, type: 3}
   rotationSpeed: 180
-  coinText: {fileID: 1373123186}
 --- !u!65 &2012313572
 BoxCollider:
   m_ObjectHideFlags: 0
