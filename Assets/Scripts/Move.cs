@@ -11,6 +11,7 @@ public class Move : MonoBehaviour
 {
 	[SerializeField] private Text text;
 	[SerializeField] public float speed;
+	[SerializeField] public float maxSpeed;
 	public Camera Playercamera;
 	private Rigidbody _rb;
 	private int _count;
@@ -29,6 +30,7 @@ public class Move : MonoBehaviour
 	public GameObject CurrentPanel;
 	public CameraFollow cameraFollow;
 	public AudioClip metallSound;
+
 	private void Awake()
 	{
 		GetReferences();
@@ -38,49 +40,55 @@ public class Move : MonoBehaviour
 	{
 		_rb = GetComponent<Rigidbody>();
 	}
-    private void Start()
-    {
+
+	private void Start()
+	{
 		SetInitialPosition();
-    }
+	}
 
 	private void SetInitialPosition()
-    {
+	{
 		_initialPostion = transform.localPosition;
-    }
+	}
+
 	public void ReEnableMovement()
-    {
+	{
 		_isReadyToPlay = true;
-    }
-    private Vector2 GetInputData()
+	}
+
+	private Vector2 GetInputData()
 	{
 		if (Input.touchCount > 0)
 		{
-			Touch touch = Input.GetTouch(0); // Get the first touch
-
-			// Check if the finger is moving
+			Touch touch = Input.GetTouch(0);
 			if (touch.phase == TouchPhase.Moved)
 			{
-				// Calculate the touch delta position
 				Vector2 deltaPosition = touch.deltaPosition;
-
-				// Normalize the delta position to get relative coordinates
 				deltaPosition.Normalize();
-
-				// Return the relative coordinates as input data
-				return deltaPosition;
+				return deltaPosition/2;
 			}
 		}
+
 		return Vector2.zero;
 	}
+
 	private void Moving()
 	{
+		
 		Vector3 movement = new Vector3(_inputValues.x, 0, _inputValues.y);
 		movement = Playercamera.transform.TransformDirection(movement);
 		movement.y = 0;
 		movement.Normalize();
-		_rb.AddForce(movement * speed * Time.fixedDeltaTime, ForceMode.Force);
+		// _rb.AddForce(movement * speed * Time.fixedDeltaTime, ForceMode.Acceleration);
+		float currentSpeed2 = Vector3.Dot(_rb.velocity, movement.normalized);
+		if (currentSpeed2 < maxSpeed)
+		{
+			_rb.AddForce(movement * speed * Time.fixedDeltaTime, ForceMode.Acceleration);
+		}
+		_rb.velocity = Vector3.ClampMagnitude(_rb.velocity, maxSpeed);
 	}
-	void FixedUpdate()
+
+void FixedUpdate()
 	{
 		if (!_isReadyToPlay) return;
 		if(_isReadyToMove) Moving();
@@ -93,10 +101,15 @@ public class Move : MonoBehaviour
 
     private void Update()
     {
-		if (!_isReadyToPlay) return;
+	    if (!_isReadyToPlay)
+	    {
+		    return;
+	    }
 		_inputValues = GetInputData();
 		_isReadyToMove = Input.anyKey;
 		currentSpeed = _rb.velocity.magnitude;
+		
+		
     }
     private float GetPitch(float speedy) {
 	    float pitch = (speedy / 10);
