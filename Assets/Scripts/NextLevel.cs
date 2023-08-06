@@ -9,7 +9,7 @@ public class NextLevel : MonoBehaviour
     public void Load()
     {
         int index = SceneManager.GetActiveScene().buildIndex + 1;
-        if (index > 10)
+        if (index > 15)
         {
            index = 1;
         }
