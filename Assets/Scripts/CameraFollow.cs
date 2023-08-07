@@ -8,9 +8,20 @@ public class CameraFollow : MonoBehaviour
     public float rotationSpeed = 5.0f;
     public float distance = 0.0f;
     public float height = 2.0f;
-    
+
+    public bool CanFollow
+    {
+        get;
+        set;
+    }
     private void FixedUpdate()
     {
+        
+        if (!CanFollow)
+        {
+            return;
+        }
+        
         Vector3 targetVelocity = target.GetComponent<Rigidbody>().velocity;
         Vector3 targetPosition = target.position + targetVelocity * Time.deltaTime;
 

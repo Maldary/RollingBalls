@@ -30,7 +30,7 @@ public class Move : MonoBehaviour
 	public GameObject CurrentPanel;
 	public CameraFollow cameraFollow;
 	public AudioClip metallSound;
-
+	public GameObject TutorText;
 	private void Awake()
 	{
 		GetReferences();
@@ -43,6 +43,7 @@ public class Move : MonoBehaviour
 
 	private void Start()
 	{
+		Application.targetFrameRate = 60;
 		SetInitialPosition();
 	}
 
@@ -63,6 +64,11 @@ public class Move : MonoBehaviour
 			Touch touch = Input.GetTouch(0);
 			if (touch.phase == TouchPhase.Moved)
 			{
+				if (!cameraFollow.CanFollow)
+				{
+					cameraFollow.CanFollow = true;
+					TutorText.gameObject.SetActive(false);
+				}
 				Vector2 deltaPosition = touch.deltaPosition;
 				deltaPosition.Normalize();
 				return deltaPosition/2;
@@ -120,6 +126,7 @@ void FixedUpdate()
 		    _audioSource.loop = true;
 		    _audioSource.pitch = GetPitch(_rb.velocity.magnitude);
 		    _audioSource.Play();
+		    
 	    }
 	    
     }
