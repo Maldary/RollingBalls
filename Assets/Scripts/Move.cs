@@ -1,5 +1,4 @@
 using System.Collections;
-using Cinemachine;
 using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine.UI;
 using UnityEngine;
@@ -24,12 +23,10 @@ public class Move : MonoBehaviour
 	public float currentSpeed;
 	public float frictionCoefficient = 1.5f;
 	public Vector3 finishLinePosition;
-	private CameraFollow _cameraFollow;
 	public float moveToFinishLineDuration = 1.0f;
 	public GameObject panel;
 	public GameObject CurrentPanel;
 	public CameraFollow cameraFollow;
-	public AudioClip metallSound;
 	public GameObject TutorText;
 	private void Awake()
 	{
@@ -71,7 +68,14 @@ public class Move : MonoBehaviour
 				}
 				Vector2 deltaPosition = touch.deltaPosition;
 				deltaPosition.Normalize();
-				return deltaPosition/2;
+				float maxSwipeLength = 200f;
+				float swipeLength = 0f;
+				swipeLength += deltaPosition.magnitude;
+				if (swipeLength >= maxSwipeLength)
+				{
+					return Vector2.zero;
+				}
+				return deltaPosition / 2;
 			}
 		}
 
@@ -80,12 +84,11 @@ public class Move : MonoBehaviour
 
 	private void Moving()
 	{
-		
+		_rb.constraints = RigidbodyConstraints.FreezeRotationZ;
 		Vector3 movement = new Vector3(_inputValues.x, 0, _inputValues.y);
 		movement = Playercamera.transform.TransformDirection(movement);
 		movement.y = 0;
 		movement.Normalize();
-		// _rb.AddForce(movement * speed * Time.fixedDeltaTime, ForceMode.Acceleration);
 		float currentSpeed2 = Vector3.Dot(_rb.velocity, movement.normalized);
 		if (currentSpeed2 < maxSpeed)
 		{
