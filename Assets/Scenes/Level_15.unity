@@ -519,8 +519,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 0}
-  speed: 2800
-  maxSpeed: 25
+  speed: 1000
+  maxSpeed: 30
   Playercamera: {fileID: 577445063}
   WinSound: {fileID: 8300000, guid: 80a898bebce512549a0723afa6214a95, type: 3}
   _audioSource: {fileID: 1504596918}
@@ -1213,13 +1213,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 555429079}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 103, y: -92, z: 93}
+  m_LocalRotation: {x: 0.062496684, y: -0, z: -0, w: 0.9980452}
+  m_LocalPosition: {x: 103, y: -44, z: 93}
   m_LocalScale: {x: 500, y: 1, z: 879}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.166, y: 0, z: 0}
 --- !u!1 &577445060
 GameObject:
   m_ObjectHideFlags: 0

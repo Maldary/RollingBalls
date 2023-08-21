@@ -2161,8 +2161,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: {fileID: 0}
-  speed: 2800
-  maxSpeed: 25
+  speed: 1000
+  maxSpeed: 30
   Playercamera: {fileID: 2016234725}
   WinSound: {fileID: 8300000, guid: 80a898bebce512549a0723afa6214a95, type: 3}
   _audioSource: {fileID: 297637357}
@@ -2173,7 +2173,6 @@ MonoBehaviour:
   panel: {fileID: 2075386825}
   CurrentPanel: {fileID: 1658203063}
   cameraFollow: {fileID: 2016234723}
-  metallSound: {fileID: 0}
   TutorText: {fileID: 429003419}
 --- !u!54 &1025168411
 Rigidbody:
@@ -2183,7 +2182,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1025168408}
   serializedVersion: 4
-  m_Mass: 80
+  m_Mass: 1.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -2243,7 +2242,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 3c33fd4c9fec57b49a69712e7bc04fac, type: 2}
+  - {fileID: 2100000, guid: 5face591a5d3560478a200d27b624b95, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

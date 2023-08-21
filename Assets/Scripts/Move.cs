@@ -28,6 +28,7 @@ public class Move : MonoBehaviour
 	public GameObject CurrentPanel;
 	public CameraFollow cameraFollow;
 	public GameObject TutorText;
+	private float speedMultiplier;
 	private void Awake()
 	{
 		GetReferences();
@@ -53,7 +54,7 @@ public class Move : MonoBehaviour
 	{
 		_isReadyToPlay = true;
 	}
-
+	
 	private Vector2 GetInputData()
 	{
 		if (Input.touchCount > 0)
@@ -66,21 +67,23 @@ public class Move : MonoBehaviour
 					cameraFollow.CanFollow = true;
 					TutorText.gameObject.SetActive(false);
 				}
+
 				Vector2 deltaPosition = touch.deltaPosition;
 				deltaPosition.Normalize();
-				float maxSwipeLength = 200f;
-				float swipeLength = 0f;
-				swipeLength += deltaPosition.magnitude;
+				float maxSwipeLength = 2f;
+				float swipeLength = deltaPosition.magnitude;
 				if (swipeLength >= maxSwipeLength)
-				{
+				{   
+					touch.phase = TouchPhase.Ended;
 					return Vector2.zero;
 				}
-				return deltaPosition / 2;
+				speedMultiplier = swipeLength; 
+				return deltaPosition * speedMultiplier;
 			}
 		}
-
 		return Vector2.zero;
 	}
+
 
 	private void Moving()
 	{
@@ -92,7 +95,7 @@ public class Move : MonoBehaviour
 		float currentSpeed2 = Vector3.Dot(_rb.velocity, movement.normalized);
 		if (currentSpeed2 < maxSpeed)
 		{
-			_rb.AddForce(movement * speed * Time.fixedDeltaTime, ForceMode.Acceleration);
+			_rb.AddForce(movement * (speed * (speedMultiplier * 2)) * Time.fixedDeltaTime, ForceMode.Acceleration);
 		}
 		_rb.velocity = Vector3.ClampMagnitude(_rb.velocity, maxSpeed);
 	}
